@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08-JS-Layout By Nongnaphat</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <!-- Blocking JavaScript -->
+        <script>
+            $(function () {
+                $("head").load("08-head.html");
+                $("#header").load("08-header.html");
+                $("#footer").load("08-footer.html");
+            });
+        </script>
+
+        <script>
+    let row
+    let cell          
+    let array_fname = []
+    let array_phone = []
+    let array_email = []
+
+  if(localStorage.getItem('fname') != null &&
+    localStorage.getItem('phone') != null &&
+    localStorage.getItem('email') != null ) {
+    array_fname = JSON.parse(localStorage.getItem('fname'))
+    array_phone = JSON.parse(localStorage.getItem('phone'))
+    array_email = JSON.parse(localStorage.getItem('email'))
+
+  }
+  </script>
+
+</head>
+<body onload="load_data()">
+    <section class="hero is-success is-fullheight has-background-light">
+        <!-- Hero head: will stick at the top -->
+        <div id="header"></div>
+       
+        
+      
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body has-text-success-light is-align-items-start">
+            <div class="columns is-centered mx-auto">
+                <div class="column">
+                    <div class="card" style="background-color: #A5E1E7;">
+                        <div class="card-content">
+                          <div class="content">
+                            <button class="button is-success is-outlined mb-3" onclick="insert_data()">Insert Data</button>
+                            <table id="tb1" class="table is-bordered is-striped is-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px;">fname</th>
+                                        <th style="width: 200px;">phone</th>
+                                        <th style="width: 200px;">email</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                </tbody>
+
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                
+                </div>
+                
+              </div>
+
+      
+        <!-- Hero footer: will stick at the bottom -->
+        <div id="footer"></div>
+       
+              <script>
+
+    let tb1 = document.getElementById('tb1').getElementsByTagName('tbody')[0]
+
+                function load_data() {
+                    for(let i = 0; i < array_fname.length; i ++){
+                    // console.log(array_fname[i])
+                    // console.log(array_phone[i])
+                    // console.log(array_email[i])
+                    row = tb1.insertRow()
+                    cell = row.insertCell()
+                    cell.innerHTML = array_fname[i]
+                    cell = row.insertCell()
+                    cell.innerHTML = array_phone[i]
+                    cell = row.insertCell()
+                    cell.innerHTML = array_email[i]
+                    cell = row.insertCell()
+                    cell.innerHTML = '<button class="button is-link is-outlined">Edit</button>'
+                    cell = row.insertCell()
+                    cell.innerHTML = '<button class="button is-danger is-outlined">Delete</button>'
+                }
+                }
+
+                
+                
+
+                function insert_data(){
+                    row = tb1.insertRow()
+                    cell = row.insertCell()
+                    cell.innerHTML = '<input class="input" type="text" placeholder="Input Full name" id="fname">'
+                    cell = row.insertCell()
+                    cell.innerHTML = '<input class="input" type="text" placeholder="Input Phone Number" id="phone">'
+                    cell = row.insertCell()
+                    cell.innerHTML = '<input class="input" type="text" placeholder="Input Email" id ="email">'
+                    cell = row.insertCell()
+                    cell.innerHTML = '<button class="button is-success is-outlined" onclick="save_data()">Save</button>'
+                    cell = row.insertCell()
+                    cell.innerHTML = '<button class="button is-warning is-outlined"onclick="cancel_insert()">Cencel</button>'
+                }
+
+                function cancel_insert() {
+                    row = tb1.deleteRow(tb1.rows.length - 1)
+                }
+
+                function save_data() {
+                    if (document.getElementById('fname').value !='' &&
+        document.getElementById('phone').value !='' &&
+        document.getElementById('email').value !='') {
+            
+        
+            
+            array_fname.push(document.getElementById('fname').value)
+            array_phone.push(document.getElementById('phone').value)
+            array_email.push(document.getElementById('email').value)
+
+            localStorage.setItem('fname', JSON.stringify(array_fname))
+            localStorage.setItem('phone', JSON.stringify(array_phone))
+            localStorage.setItem('email', JSON.stringify(array_email))
+            
+            document.getElementById('fname').value =''
+            document.getElementById('phone').value =''
+            document.getElementById('email').value =''
+
+            tb1.innerHTML =''
+            
+            load_data()
+
+
+        }else{
+            
+            window.alert('กรุณาป้อนข้อมูลให้ครบ')
+        }
+        }
+
+              </script>
+
+      </section>
+</body>
+</html>
