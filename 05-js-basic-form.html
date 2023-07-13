@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+        integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+        crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-Js-Basic form By Waiyawat</title>
+
+    <script>
+
+        function click_submit() {
+
+            if (document.getElementById('fname').value != '' &&
+                document.getElementById('phone').value != '' &&
+                document.getElementById('email').value != '') {
+
+                document.getElementById('output_fname').innerHTML = document.getElementById('fname').value
+                document.getElementById('output_phone').innerHTML = document.getElementById('phone').value
+                document.getElementById('output_email').innerHTML = document.getElementById('email').value
+
+                document.getElementById('fname').value =''
+                document.getElementById('phone').value =''
+                document.getElementById('email').value =''
+            } else {
+
+                window.alert('กรุณาป้อนข้อมูลให้ครบ!!!!!')
+
+            }
+        }
+
+        function focusout_fname() {
+            if (document.getElementById('fname').value != '') {
+                document.getElementById('noti_fname').innerHTML = ''
+            } else {
+
+                document.getElementById('noti_fname').innerHTML = 'This Full Name is invalid'
+            }
+        }
+
+        function focusout_phone() {
+            if (document.getElementById('phone').value != '') {
+                document.getElementById('noti_phone').innerHTML = ''
+            } else {
+
+                document.getElementById('noti_phone').innerHTML = 'This Phone Number is invalid'
+            }
+        }
+
+        function focusout_email() {
+            if (document.getElementById('email').value != '') {
+                document.getElementById('noti_email').innerHTML = ''
+            } else {
+
+                document.getElementById('noti_email').innerHTML = 'This Email is invalid'
+            }
+        }
+
+        function focus_fname() {
+            document.getElementById('noti_fname').innerHTML = ''
+        }
+
+        function focus_phone() {
+            document.getElementById('noti_phone').innerHTML = ''
+        }
+
+        function focus_email() {
+            document.getElementById('noti_email').innerHTML = ''
+        }
+        function click_cancel(){
+        document.getElementById('fname').value =''
+        document.getElementById('phone').value =''
+        document.getElementById('email').value =''
+
+        document.getElementById('output_fname').innerHTML = ''
+        document.getElementById('output_phone').innerHTML = ''
+        document.getElementById('output_email').innerHTML = ''
+    }
+
+
+    </script>
+
+</head>
+
+<body>
+    <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Home
+                </a>
+
+                <a class="navbar-item">
+                    Documentation
+                </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        More
+                    </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item" href="05-js-basic-form.html">
+                          page-05
+                        </a>
+                        <a class="navbar-item" href="06-js-insert-data.html">
+                          page-06
+                        </a>
+                        <a class="navbar-item" href="07-js-show-data.html">
+                          page-07
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">
+                          Report an issue
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="columns is-centered m-5">
+        <div class="column is-one-third is-half">
+            <div class="card">
+                <div class="card-content " style="background-color: beige;">
+                    <div class="content">
+                        <div class="field">
+                            <label class="label">Full Name</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" placeholder="Input Full Name" id="fname"
+                                    onfocusout="focusout_fname()" onfocus="focus_fname()">
+                                <span class="icon is-small is-left">
+                                    <i class="far fa-smile-wink fa-pulse fa-lg" style="color: #8ac2ff;"></i>
+                                </span>
+                            </div>
+                            <p id="noti_fname" class="help is-danger"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Phone Number</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-success" type="text" placeholder="Input Phone Number" id="phone"
+                                    onfocusout="focusout_phone()" onfocus="focus_phone()">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-phone-square-alt fa-pulse fa-lg" style="color: #2a511f;"></i>
+                                </span>
+                            </div>
+                            <p id="noti_phone" class="help is-danger"></p>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input is-danger" type="email" placeholder="Email input" id="email"
+                                    onfocusout="focusout_email()" onfocus="focus_email()">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope-open-text fa-pulse fa-lg" style="color: #7fff5c;"></i>
+                                </span>
+                            </div>
+                            <p id="noti_email" class="help is-danger"></p>
+                        </div>
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link" onclick="click_submit()">Submit</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light "style="background-color: #EFE1D1;"
+                          onclick="click_cancel()">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-one-third is-half">
+            <div class="card">
+                <div class="card-content " style="background-color: #EBDEF0">
+                    <div class="content">
+                        <p id="output_fname"></p>
+                        <p id="output_phone"></p>
+                        <p id="output_email"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
