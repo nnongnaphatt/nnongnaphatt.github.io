@@ -18,7 +18,8 @@
 
         <script>
     let row
-    let cell          
+    let cell    
+    let ed = 0      
     let array_fname = []
     let array_phone = []
     let array_email = []
@@ -94,9 +95,9 @@
                     cell = row.insertCell()
                     cell.innerHTML = array_email[i]
                     cell = row.insertCell()
-                    cell.innerHTML = '<button class="button is-link is-outlined">Edit</button>'
+                    cell.innerHTML = '<button class="button is-link is-outlined" onclick="edit_data(' + i + ')">Edit</button>'
                     cell = row.insertCell()
-                    cell.innerHTML = '<button class="button is-danger is-outlined">Delete</button>'
+                    cell.innerHTML = '<button class="button is-danger is-outlined" onclick="delete_data(' + i + ')">Delete</button>'
                 }
                 }
 
@@ -151,6 +152,68 @@
         }
         }
 
+        function delete_data(i){
+            if(confirm('Delete Data(y/n)')){
+                //console.log(i)
+            //console.log(array_fname)
+            array_fname.splice(i,1)
+            array_phone.splice(i,1)
+            array_email.splice(i,1)
+
+
+
+            //console.log(array_fname)
+
+
+
+            localStorage.setItem('fname', JSON.stringify(array_fname))
+            localStorage.setItem('phone', JSON.stringify(array_phone))
+            localStorage.setItem('email', JSON.stringify(array_email))
+
+            tb1.innerHTML=''
+            
+            load_data()
+            
+            }
+            
+        }
+
+        function edit_data(i){
+            if(ed == 0){
+                ed = 1
+            tb1.rows[i].cells[0].innerHTML ='<input class="input" type="text" placeholder="Input Full name" id="fname" value="'+array_fname[i]+ '">'
+            tb1.rows[i].cells[1].innerHTML ='<input class="input" type="text" placeholder="Input Phone number" id="phone" value="'+array_phone[i]+ '">'
+            tb1.rows[i].cells[2].innerHTML ='<input class="input" type="text" placeholder="Input Email" id="email" value="'+array_email[i]+ '">'
+           
+
+            tb1.rows[i].cells[3].innerHTML ='<button class="button is-success is-outlined" onclick="save_edit(' + i + ')">Save</button>'
+            tb1.rows[i].cells[4].innerHTML ='<button class="button is-warning is-outlined" onclick="cancel_edit()">Cencel</button>'
+            console.log(tb1.rows[0].cells[0])
+            }
+           
+        }
+
+        function cancel_edit(){
+            tb1.innerHTML =''
+            load_data()
+            ed = 0
+        }
+        function save_edit(i){
+            array_fname[i] = document.getElementById('fname').value
+            array_phone[i] = document.getElementById('phone').value
+            array_email[i] = document.getElementById('email').value
+
+            //console.log(array_fname)
+
+            localStorage.setItem('fname', JSON.stringify(array_fname))
+            localStorage.setItem('phone', JSON.stringify(array_phone))
+            localStorage.setItem('email', JSON.stringify(array_email))
+            
+            tb1.innerHTML = ''
+            load_data()
+            ed = 0 
+            
+        }
               </script>
 
       </section>
